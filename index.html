@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="InterviewJS — a fast, interactive JavaScript, Web and React interview practice app.">
+  <meta name="theme-color" content="#111111">
+  <title>InterviewJS — Code smarter.</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="InterviewJS home">
+        <span class="brand-mark">{ }</span>
+        <span>InterviewJS</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#home">Home</a>
+        <a href="#history">History</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="historyBtn" class="ghost-btn desktop-only" type="button">History</button>
+        <button id="themeBtn" class="icon-btn" type="button" aria-label="Toggle theme" title="Toggle theme">
+          <span id="themeIcon">◐</span>
+        </button>
+        <button id="menuBtn" class="icon-btn mobile-only" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+      </div>
+    </header>
+
+    <div id="mobileMenu" class="mobile-menu" hidden>
+      <a href="#home">Home</a>
+      <a href="#history">History</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <main>
+      <!-- HOME -->
+      <section id="homeScreen" class="screen active">
+        <div class="container hero">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="status-dot"></span> Interactive JavaScript Assessment</div>
+            <h1>Think fast.<br><span>Code smarter.</span></h1>
+            <p>Practice JavaScript, Web and React through a real-time interview simulation built entirely with HTML, CSS and JavaScript.</p>
+            <div class="hero-actions">
+              <button id="startBtn" class="primary-btn" type="button">Start Interview <span>→</span></button>
+              <a class="text-btn" href="#history">View previous attempts</a>
+            </div>
+            <div class="hero-meta">
+              <span>40+ questions</span>
+              <span>•</span>
+              <span>Timed sessions</span>
+              <span>•</span>
+              <span>Local history</span>
+            </div>
+          </div>
+
+          <div class="code-card" aria-label="Live JavaScript example">
+            <div class="code-top"><span></span><span></span><span></span><small>live_session.js</small></div>
+            <pre><code><span class="kw">const</span> session = {
+  topic: <span class="str">"JavaScript"</span>,
+  questions: <span class="num">10</span>,
+  timer: <span class="num">60</span>
+};
+
+<span class="kw">function</span> <span class="fn">selectAnswer</span>(answer) {
+  <span class="kw">return</span> answer === correctAnswer;
+}
+
+<span class="cm">// Your browser runs the assessment.</span></code></pre>
+            <div class="code-status"><span class="status-dot"></span><span id="homeStatus">JavaScript engine ready</span></div>
+          </div>
+        </div>
+
+        <div class="container feature-grid">
+          <article class="feature-card"><span>01</span><div><h3>Dynamic Questions</h3><p>Questions and options are generated and shuffled at runtime.</p></div></article>
+          <article class="feature-card"><span>02</span><div><h3>Live Timer</h3><p>Per-question countdown with visible warnings and automatic submission.</p></div></article>
+          <article class="feature-card"><span>03</span><div><h3>Instant Results</h3><p>Score, topic performance and answer review are calculated instantly.</p></div></article>
+        </div>
+      </section>
+
+      <!-- SETUP -->
+      <section id="setupScreen" class="screen">
+        <div class="container narrow">
+          <div class="page-heading">
+            <a href="#home" class="back-link">← Back</a>
+            <p class="eyebrow">Session setup</p>
+            <h2>Build your interview.</h2>
+            <p>Choose your focus. The question order and answer order will be randomized for every session.</p>
+          </div>
+
+          <div class="setup-layout">
+            <div class="setup-main">
+              <div class="setup-group">
+                <div class="group-label"><span>01</span> Topic</div>
+                <div id="topicOptions" class="option-grid">
+                  <button class="select-card selected" data-topic="all" type="button"><strong>Mixed</strong><span>JS + Web + React</span></button>
+                  <button class="select-card" data-topic="javascript" type="button"><strong>JavaScript</strong><span>Language & runtime</span></button>
+                  <button class="select-card" data-topic="web" type="button"><strong>Web</strong><span>HTML, CSS & browser</span></button>
+                  <button class="select-card" data-topic="react" type="button"><strong>React</strong><span>Components & hooks</span></button>
+                </div>
+              </div>
+
+              <div class="setup-group">
+                <div class="group-label"><span>02</span> Difficulty</div>
+                <div id="difficultyOptions" class="pill-grid">
+                  <button class="pill selected" data-difficulty="all" type="button">All levels</button>
+                  <button class="pill" data-difficulty="easy" type="button">Easy</button>
+                  <button class="pill" data-difficulty="medium" type="button">Medium</button>
+                  <button class="pill" data-difficulty="hard" type="button">Hard</button>
+                </div>
+              </div>
+
+              <div class="setup-group">
+                <div class="group-label"><span>03</span> Questions</div>
+                <div id="countOptions" class="pill-grid">
+                  <button class="pill" data-count="5" type="button">5</button>
+                  <button class="pill selected" data-count="10" type="button">10</button>
+                  <button class="pill" data-count="15" type="button">15</button>
+                  <button class="pill" data-count="20" type="button">20</button>
+                </div>
+              </div>
+
+              <div class="setup-note">
+                <span>i</span>
+                <p><strong>Fair play:</strong> once you select an answer, it is locked for that question. You can move forward, but you cannot change the submitted answer.</p>
+              </div>
+
+              <button id="beginBtn" class="primary-btn wide" type="button">Begin Interview <span>→</span></button>
+            </div>
+
+            <aside class="session-preview">
+              <p class="eyebrow">Live preview</p>
+              <div class="preview-number" id="previewCount">10</div>
+              <h3>questions</h3>
+              <div class="preview-row"><span>Topic</span><strong id="previewTopic">Mixed</strong></div>
+              <div class="preview-row"><span>Difficulty</span><strong id="previewDifficulty">All levels</strong></div>
+              <div class="preview-row"><span>Time</span><strong id="previewTime">10 min</strong></div>
+              <div class="preview-row"><span>Question pool</span><strong id="previewPool">40+</strong></div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUIZ -->
+      <section id="quizScreen" class="screen">
+        <div class="container quiz-container">
+          <div class="quiz-header">
+            <div>
+              <p class="eyebrow" id="quizTopic">JavaScript</p>
+              <div class="progress-copy"><span id="currentNumber">1</span> / <span id="totalNumber">10</span></div>
+            </div>
+            <div id="timerBox" class="timer-box" aria-live="polite">
+              <span class="timer-icon">◷</span>
+              <span id="timer">01:00</span>
+            </div>
+          </div>
+
+          <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
+
+          <div class="quiz-card">
+            <div class="question-meta">
+              <span id="questionTopic" class="tag">JavaScript</span>
+              <span id="difficultyBadge" class="tag muted">Medium</span>
+            </div>
+            <h2 id="question">Loading question…</h2>
+            <div id="answers" class="answers"></div>
+            <div id="feedback" class="feedback" hidden></div>
+          </div>
+
+          <div class="quiz-footer">
+            <div class="js-status"><span class="status-dot"></span><span id="jsStatus">JavaScript is managing this session.</span></div>
+            <div class="quiz-actions">
+              <button id="skipButton" class="ghost-btn" type="button">Skip</button>
+              <button id="nextButton" class="primary-btn" type="button" disabled>Choose an answer</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESULT -->
+      <section id="resultScreen" class="screen">
+        <div class="container narrow">
+          <div class="result-heading">
+            <p class="eyebrow">Session complete</p>
+            <h2 id="resultTitle">Nice run.</h2>
+            <p id="resultMessage">Here is how you performed.</p>
+          </div>
+
+          <div class="result-card">
+            <div class="score-ring" id="scoreRing"><div><strong id="finalScore">0%</strong><span>score</span></div></div>
+            <div class="result-stats">
+              <div><span>Correct</span><strong id="correctCount">0</strong></div>
+              <div><span>Wrong</span><strong id="wrongCount">0</strong></div>
+              <div><span>Skipped</span><strong id="skippedCount">0</strong></div>
+            </div>
+          </div>
+
+          <div class="result-section">
+            <div class="section-heading"><p class="eyebrow">Breakdown</p><h3>Topic performance</h3></div>
+            <div id="topicPerformance" class="performance-list"></div>
+          </div>
+
+          <div class="result-actions">
+            <button id="reviewButton" class="ghost-btn" type="button">Review answers</button>
+            <button id="retryButton" class="primary-btn" type="button">Try again <span>↻</span></button>
+          </div>
+
+          <div id="reviewSection" class="review-section" hidden>
+            <div class="section-heading"><p class="eyebrow">Review</p><h3>Your answers</h3></div>
+            <div id="reviewList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HISTORY -->
+      <section id="historyScreen" class="screen">
+        <div class="container narrow">
+          <div class="page-heading">
+            <p class="eyebrow">Local history</p>
+            <h2>Previous attempts.</h2>
+            <p>Your attempts are stored only in this browser using LocalStorage.</p>
+          </div>
+          <div id="historyList" class="history-list"></div>
+          <div id="emptyHistory" class="empty-state">
+            <div class="empty-icon">↗</div>
+            <h3>No attempts yet.</h3>
+            <p>Complete your first interview and your result will appear here.</p>
+            <button class="primary-btn" data-route="setup" type="button">Start an interview</button>
+          </div>
+          <button id="clearHistoryBtn" class="danger-text" type="button">Clear local history</button>
+        </div>
+      </section>
+
+      <!-- PRIVACY -->
+      <section id="privacyScreen" class="screen">
+        <div class="container legal-page">
+          <p class="eyebrow">Legal</p>
+          <h2>Privacy Policy</h2>
+          <p class="updated">Last updated: September 2026</p>
+
+          <div class="legal-content">
+            <h3>What we collect</h3>
+            <p>InterviewJS is designed as a client-side practice application. It does not require an account and does not ask for your name, password, or payment information.</p>
+
+            <h3>What stays in your browser</h3>
+            <p>Your interview results, selected theme and small application preferences are stored in your browser's LocalStorage. This data remains on your device unless you clear it through the application or your browser settings.</p>
+
+            <h3>No hidden tracking</h3>
+            <p>This demo does not intentionally send interview answers or scores to a server. There are no third-party analytics calls in the application.</p>
+
+            <h3>Contact</h3>
+            <p>If you contact the project owner using the Contact page, your email client or the configured contact service may process the information you choose to send.</p>
+
+            <h3>Changes</h3>
+            <p>This policy may be updated when the application changes. The latest update date is shown at the top of this page.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contactScreen" class="screen">
+        <div class="container narrow">
+          <div class="page-heading">
+            <p class="eyebrow">Get in touch</p>
+            <h2>Contact the team.</h2>
+            <p>Have feedback, found a question that looks wrong, or want to suggest a topic?</p>
+          </div>
+
+          <form id="contactForm" class="contact-form" novalidate>
+            <div class="field-row">
+              <label>Name <input id="contactName" name="name" type="text" maxlength="80" autocomplete="name" required></label>
+              <label>Email <input id="contactEmail" name="email" type="email" maxlength="120" autocomplete="email" required></label>
+            </div>
+            <label>Subject
+              <select id="contactSubject" name="subject">
+                <option>General feedback</option>
+                <option>Question issue</option>
+                <option>Feature request</option>
+                <option>Privacy question</option>
+              </select>
+            </label>
+            <label>Message
+              <textarea id="contactMessage" name="message" rows="7" maxlength="1200" required></textarea>
+            </label>
+            <div class="form-bottom">
+              <small><span id="messageCount">0</span>/1200</small>
+              <button class="primary-btn" type="submit">Prepare email <span>→</span></button>
+            </div>
+            <div id="contactSuccess" class="success-box" hidden></div>
+          </form>
+
+          <div class="contact-note">
+            <strong>Frontend-only note</strong>
+            <p>This static version prepares a message for your default email client. For a real production deployment, connect the form to your backend or form service instead of exposing an email address in client code.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>InterviewJS</span>
+        <div><a href="#privacy">Privacy</a><a href="#contact">Contact</a></div>
+        <span>Built with HTML, CSS & JavaScript</span>
+      </div>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="confirmModal" class="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+      <button id="modalClose" class="modal-close" type="button" aria-label="Close">×</button>
+      <p class="eyebrow">End session</p>
+      <h3 id="confirmTitle">Leave this interview?</h3>
+      <p>Your current progress will be lost. This cannot be undone.</p>
+      <div class="modal-actions">
+        <button id="modalCancel" class="ghost-btn" type="button">Keep going</button>
+        <button id="modalConfirm" class="primary-btn" type="button">Leave interview</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
